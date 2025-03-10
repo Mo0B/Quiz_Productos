@@ -62,120 +62,150 @@ public class Main {
                     }
                 }
                 case 2-> {
-                    System.out.println("""
+                    if (_productos.size()>0){
+                        System.out.println("""
                             ##   VENDER PRODUCTOS   ##
                             Digite el producto a vender:
                             """);
-                    System.out.println("  Nombre    Cantidad    Precio");
-                    for (int i = 0; i < _productos.size(); i++){
-                        System.out.println((i+1)+" "+_productos.get(i).get_nombre()+"     "+
-                                _productos.get(i).get_cantidad()+"       "+
-                                _productos.get(i).get_precio());
-                    }
-                    int id_producto = _teclado.nextInt();
-                    id_producto = id_producto-1;
-                    System.out.println("Producto: "+ _productos.get(id_producto).get_nombre() +
-                            "\n¿ Cantidad a vender ?." +
-                            " Cantidad en existencia: ("+ _productos.get(id_producto).get_cantidad()+"): " +
-                            "");
-                    int _cantidad = _teclado.nextInt();
-                    if (_cantidad > 0){
-                        if (_productos.get(id_producto).get_cantidad() >= _cantidad){
-                            _productos.get(id_producto).Vender(_cantidad);
-                            System.out.println("_________________ El producto se ha vendido con EXITO");
-                        }else {
-                            System.out.println("------------- No hay unidades Suficientes");
+                        System.out.println("  Nombre    Cantidad    Precio");
+                        for (int i = 0; i < _productos.size(); i++){
+                            System.out.println((i+1)+" "+_productos.get(i).get_nombre()+"     "+
+                                    _productos.get(i).get_cantidad()+"       "+
+                                    _productos.get(i).get_precio());
                         }
-                    }else if (_cantidad == 0){
-                        System.out.println("La cantidad de productos a vender no puede ser cero (0)");
-                    }else if (_cantidad < 0 ){
-                        System.out.println("La cantidad de productos a vender no puede ser negativa");
+                        int id_producto = _teclado.nextInt();
+                        id_producto = id_producto-1;
+                        System.out.println("Producto: "+ _productos.get(id_producto).get_nombre() +
+                                "\n¿ Cantidad a vender ?." +
+                                " Cantidad en existencia: ("+ _productos.get(id_producto).get_cantidad()+"): " +
+                                "");
+                        int _cantidad = _teclado.nextInt();
+                        if (_cantidad > 0){
+                            if (_productos.get(id_producto).get_cantidad() >= _cantidad){
+                                _productos.get(id_producto).Vender(_cantidad);
+                                System.out.println("_________________ El producto se ha vendido con EXITO");
+                            }else {
+                                System.out.println("------------- No hay unidades Suficientes");
+                            }
+                        }else if (_cantidad == 0){
+                            System.out.println("La cantidad de productos a vender no puede ser cero (0)");
+                        }else if (_cantidad < 0 ){
+                            System.out.println("La cantidad de productos a vender no puede ser negativa");
+                        }
+                    }else {
+                        System.out.println("No hay Productos registrados");
                     }
+
                 }
                 case 3-> {
-                    System.out.println("""
+                    if (_productos.size()>0){
+                        System.out.println("""
                             ##   REPONER STOCKS   ##
                             Digite el producto a Reponer:
                             """);
-                    System.out.println("  Nombre    Cantidad");
-                    for (int i = 0; i < _productos.size(); i++){
-                        System.out.println((i+1)+" "+_productos.get(i).get_nombre() +
-                                "    "+_productos.get(i).get_cantidad());
+                        System.out.println("  Nombre    Cantidad");
+                        for (int i = 0; i < _productos.size(); i++){
+                            System.out.println((i+1)+" "+_productos.get(i).get_nombre() +
+                                    "    "+_productos.get(i).get_cantidad());
+                        }
+                        int id_producto = _teclado.nextInt();
+                        id_producto = id_producto - 1;
+                        System.out.println("Producto: "+ _productos.get(id_producto).get_nombre() +
+                                " Cantidad en existencia: ("+ _productos.get(id_producto).get_cantidad()+"): " +
+                                "\nCantidad: ");
+                        int _cantidad = _teclado.nextInt();
+                        _productos.get(id_producto).Reponer(_cantidad);
+                        System.out.println("_______________ Se han repuesto productos con EXITO");
+                    }else {
+                        System.out.println("No hay Productos registrados");
                     }
-                    int id_producto = _teclado.nextInt();
-                    id_producto = id_producto - 1;
-                    System.out.println("Producto: "+ _productos.get(id_producto).get_nombre() +
-                            " Cantidad en existencia: ("+ _productos.get(id_producto).get_cantidad()+"): " +
-                            "\nCantidad: ");
-                    int _cantidad = _teclado.nextInt();
-                    _productos.get(id_producto).Reponer(_cantidad);
-                    System.out.println("_______________ Se han repuesto productos con EXITO");
+
                 }
                 case 4-> {
-                    System.out.println("""
+                    if (_productos.size()>0){
+                        System.out.println("""
                             ##   APLICAR DESCUENTO A UN PRODUCTO   ##
                             Digite el producto:
                             """);
-                    System.out.println("  Nombre    Precio");
-                    for (int i = 0; i < _productos.size(); i++){
-                        System.out.println((i+1)+" "+_productos.get(i).get_nombre() +
-                                "    "+_productos.get(i).get_precio());
+                        System.out.println("  Nombre    Precio");
+                        for (int i = 0; i < _productos.size(); i++){
+                            System.out.println((i+1)+" "+_productos.get(i).get_nombre() +
+                                    "    "+_productos.get(i).get_precio());
+                        }
+                        int id_producto = _teclado.nextInt();
+                        id_producto = id_producto - 1;
+                        _productos.get(id_producto).AplicarDescuento();
+                        System.out.println("________________ Descuento aplicado con EXITO");
+                    }else {
+                        System.out.println("No hay Productos registrados");
                     }
-                    int id_producto = _teclado.nextInt();
-                    id_producto = id_producto - 1;
-                    _productos.get(id_producto).AplicarDescuento();
-                    System.out.println("________________ Descuento aplicado con EXITO");
+
 
                 }
                 case 5-> {
                     System.out.println("Informacion de inventario");
-                    for (int i = 0; i < _productos.size(); i++){
-                        System.out.println((i+1) + " " +_productos.get(i).Informacion());
+                    if (_productos.size()>0){
+                        for (int i = 0; i < _productos.size(); i++){
+                            System.out.println((i+1) + " " +_productos.get(i).Informacion());
+                        }
+                        System.out.println("Digite cualquier letra para salir");
+                        String _aceptar = _teclado.next();
+                    }else {
+                        System.out.println("No hay productos Registrados");
                     }
-                    System.out.println("Digite cualquier letra para salir");
-                    String _aceptar = _teclado.next();
+
                 }
                 case 6-> {
-                    System.out.println("""
+                    if (_productos.size()>0){
+                        System.out.println("""
                             ##   AUMENTAR PRECIOS   ##
                             Digite el producto al que se le va aplicar un aumento de precio:
                             """);
-                    System.out.println("  Nombre    Precio");
-                    for (int i = 0; i < _productos.size(); i++){
-                        System.out.println((i+1)+" "+_productos.get(i).get_nombre() +
-                                "    "+_productos.get(i).get_precio());
+                        System.out.println("  Nombre    Precio");
+                        for (int i = 0; i < _productos.size(); i++){
+                            System.out.println((i+1)+" "+_productos.get(i).get_nombre() +
+                                    "    "+_productos.get(i).get_precio());
+                        }
+                        int id_producto = _teclado.nextInt();
+                        id_producto = id_producto - 1;
+                        System.out.println("Producto: "+ _productos.get(id_producto).get_nombre() +
+                                "\nEn cuando aumentara el precio, digitelo en porcentajes:");
+                        double _porcentaje = _teclado.nextDouble();
+                        if (_porcentaje > 0){
+                            _productos.get(id_producto).AumentarPrecio(_porcentaje);
+                            System.out.println("_______________ Precio del producto aumentado un "+_porcentaje+" %");
+                        }
+                        else {
+                            System.out.println("El porcentaje no puede ser Negativo ni Cero (0)");
+                        }
+                    }else {
+                        System.out.println("No hay Productos registrados");
                     }
-                    int id_producto = _teclado.nextInt();
-                    id_producto = id_producto - 1;
-                    System.out.println("Producto: "+ _productos.get(id_producto).get_nombre() +
-                            "\nEn cuando aumentara el precio, digitelo en porcentajes:");
-                    double _porcentaje = _teclado.nextDouble();
-                    if (_porcentaje > 0){
-                        _productos.get(id_producto).AumentarPrecio(_porcentaje);
-                        System.out.println("_______________ Precio del producto aumentado un "+_porcentaje+" %");
-                    }
-                    else {
-                        System.out.println("El porcentaje no puede ser Negativo ni Cero (0)");
-                    }
+
                 }
                 case 7-> {
-                    double _valortotal = 0;
-                    System.out.println("""
+                    if (_productos.size()>0){
+                        double _valortotal = 0;
+                        System.out.println("""
                             ##   VALOR TOTAL INVENTARIO   ##
                             """);
-                    for (int i = 0; i < _productos.size(); i++){
-                        double _indiTotal = _productos.get(i).ValorTotal();
-                        _valortotal = _indiTotal + _valortotal;
-                    }
-                    System.out.println("Valor total de los Productos: " + _valortotal+"\n");
+                        for (int i = 0; i < _productos.size(); i++){
+                            double _indiTotal = _productos.get(i).ValorTotal();
+                            _valortotal = _indiTotal + _valortotal;
+                        }
+                        System.out.println("Valor total de los Productos: " + _valortotal+"\n");
 
-                    for (int i = 0; i < _productos.size(); i++){
-                        double _indiTotal = _productos.get(i).ValorTotal();
-                        System.out.println("Producto: "+_productos.get(i).get_nombre()+
-                                " | Valor Total: "+_productos.get(i).ValorTotal());
+                        for (int i = 0; i < _productos.size(); i++){
+                            double _indiTotal = _productos.get(i).ValorTotal();
+                            System.out.println("Producto: "+_productos.get(i).get_nombre()+
+                                    " | Valor Total: "+_productos.get(i).ValorTotal());
+                        }
+                        System.out.println("Digite cualquier letra para Salir");
+                        String _aceptar = _teclado.next();
+                    }else {
+                        System.out.println("No hay Productos registrados");
                     }
-                    System.out.println("Digite cualquier letra para Salir");
-                    String _aceptar = _teclado.next();
+
                 }
                 case 8-> {
                     if (_productos.size() > 1){
@@ -190,8 +220,9 @@ public class Main {
                         }
                         System.out.println("\nProducto: "+ _productos.getLast().get_nombre()+" NUEVO !!");
                         int id_productoA = _teclado.nextInt();
+                        id_productoA = id_productoA -1 ;
                         if (id_productoA < _lista){
-                            id_productoA = id_productoA -1 ;
+
                             System.out.println("""
                             Digite el segundo producto:
                             """);
@@ -199,8 +230,9 @@ public class Main {
                                 System.out.println((i+1)+" "+_productos.get(i).get_nombre());
                             }
                             int id_productoB = _teclado.nextInt();
+                            id_productoB = id_productoB -1 ;
                             if (id_productoB < _lista){
-                                id_productoB = id_productoB -1 ;
+
                                 if (_productos.get(id_productoA).get_precio() < _productos.get(id_productoB).get_precio()){
                                     System.out.println("El producto: "+_productos.get(id_productoB).get_nombre()+
                                             " es mas caro que el producto: "+_productos.get(id_productoA).get_nombre());

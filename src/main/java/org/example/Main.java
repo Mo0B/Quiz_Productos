@@ -137,64 +137,95 @@ public class Main {
                 }
                 case 6-> {
                     System.out.println("""
-                            Aumentar precio de  Productos:
-                            Digite el producto:
+                            ##   AUMENTAR PRECIOS   ##
+                            Digite el producto al que se le va aplicar un aumento de precio:
                             """);
+                    System.out.println("  Nombre    Precio");
                     for (int i = 0; i < _productos.size(); i++){
                         System.out.println((i+1)+" "+_productos.get(i).get_nombre() +
-                                _productos.get(i).get_cantidad()+
-                                _productos.get(i).get_precio());
+                                "    "+_productos.get(i).get_precio());
                     }
                     int id_producto = _teclado.nextInt();
                     id_producto = id_producto - 1;
                     System.out.println("Producto: "+ _productos.get(id_producto).get_nombre() +
-                            "\nEn cuando aumentara el precio, digitelo en porcentaje.");
+                            "\nEn cuando aumentara el precio, digitelo en porcentajes:");
                     double _porcentaje = _teclado.nextDouble();
-                    _productos.get(id_producto).AumentarPrecio(_porcentaje);
+                    if (_porcentaje > 0){
+                        _productos.get(id_producto).AumentarPrecio(_porcentaje);
+                        System.out.println("_______________ Precio del producto aumentado un "+_porcentaje+" %");
+                    }
+                    else {
+                        System.out.println("El porcentaje no puede ser Negativo ni Cero (0)");
+                    }
                 }
                 case 7-> {
                     double _valortotal = 0;
                     System.out.println("""
-                            Valor total inventario:
+                            ##   VALOR TOTAL INVENTARIO   ##
                             """);
                     for (int i = 0; i < _productos.size(); i++){
                         double _indiTotal = _productos.get(i).ValorTotal();
-
                         _valortotal = _indiTotal + _valortotal;
-
                     }
-                    System.out.println("valor total: " + _valortotal);
+                    System.out.println("Valor total de los Productos: " + _valortotal+"\n");
+
+                    for (int i = 0; i < _productos.size(); i++){
+                        double _indiTotal = _productos.get(i).ValorTotal();
+                        System.out.println("Producto: "+_productos.get(i).get_nombre()+
+                                " | Valor Total: "+_productos.get(i).ValorTotal());
+                    }
+                    System.out.println("Digite cualquier letra para Salir");
+                    String _aceptar = _teclado.next();
                 }
                 case 8-> {
-                    System.out.println("""
-                            Comparar Productos:
-                            Digite el producto:
+                    if (_productos.size() > 1){
+                        int _lista = 0;
+                        System.out.println("""
+                            ##   COMPARAR PRODUCTOS   ##
+                            Digite el primer producto:
                             """);
-                    for (int i = 0; i < _productos.size(); i++){
-                        System.out.println((i+1)+" "+_productos.get(i).get_nombre());
-                    }
-                    System.out.println("\nNuevo Producto: "+ _productos.getLast().get_nombre());
-                    int id_productoA = _teclado.nextInt();
-                    id_productoA = id_productoA -1 ;
-                    System.out.println("""
-                            Comparar Productos:
+                        for (int i = 0; i < _productos.size(); i++){
+                            System.out.println((i+1)+" "+_productos.get(i).get_nombre());
+                            _lista++;
+                        }
+                        System.out.println("\nProducto: "+ _productos.getLast().get_nombre()+" NUEVO !!");
+                        int id_productoA = _teclado.nextInt();
+                        if (id_productoA < _lista){
+                            id_productoA = id_productoA -1 ;
+                            System.out.println("""
                             Digite el segundo producto:
                             """);
-                    for (int i = 0; i < _productos.size(); i++){
-                        System.out.println((i+1)+" "+_productos.get(i).get_nombre());
+                            for (int i = 0; i < _productos.size(); i++){
+                                System.out.println((i+1)+" "+_productos.get(i).get_nombre());
+                            }
+                            int id_productoB = _teclado.nextInt();
+                            if (id_productoB < _lista){
+                                id_productoB = id_productoB -1 ;
+                                if (_productos.get(id_productoA).get_precio() < _productos.get(id_productoB).get_precio()){
+                                    System.out.println("El producto: "+_productos.get(id_productoB).get_nombre()+
+                                            " es mas caro que el producto: "+_productos.get(id_productoA).get_nombre());
+                                } else if (_productos.get(id_productoA).get_precio() > _productos.get(id_productoB).get_precio()){
+                                    System.out.println("El producto: "+_productos.get(id_productoA).get_nombre()+
+                                            " es mas caro que el producto: "+_productos.get(id_productoB).get_nombre());
+                                }else if (_productos.get(id_productoA).get_precio() == _productos.get(id_productoB).get_precio()){
+                                    System.out.println("El producto: "+_productos.get(id_productoA).get_nombre()+
+                                            " tiene el mismo precio que el producto: "+_productos.get(id_productoB).get_nombre());
+                                }
+                            }else {
+                                System.out.println("____  Fuera de rango, no se encuentra el producto seleccionado");
+                            }
+                        }else {
+                            System.out.println("____  Fuera de rango, no se encuentra el producto seleccionado");
+                        }
+                    }else if (_productos.size() == 0){
+
+                        System.out.println("No hay Productos registrados");
+                        System.out.println(_productos.size());
+                    }else {
+                        System.out.println("No hay Productos Suficientes para Comparar");
                     }
-                    int id_productoB = _teclado.nextInt();
-                    id_productoB = id_productoB -1 ;
-                    if (_productos.get(id_productoA).get_precio() < _productos.get(id_productoB).get_precio()){
-                        System.out.println("el producto: "+_productos.get(id_productoB).get_nombre()+
-                                " es mas caro que el producto: "+_productos.get(id_productoA).get_nombre());
-                    } else if (_productos.get(id_productoA).get_precio() > _productos.get(id_productoB).get_precio()){
-                        System.out.println("el producto: "+_productos.get(id_productoA).get_nombre()+
-                                " es mas caro que el producto: "+_productos.get(id_productoB).get_nombre());
-                    }else if (_productos.get(id_productoA).get_precio() == _productos.get(id_productoB).get_precio()){
-                        System.out.println("el producto: "+_productos.get(id_productoA).get_nombre()+
-                                " tiene el mismo precio que el producto: "+_productos.get(id_productoB).get_nombre());
-                    }
+
+
                 }
                 default -> System.out.println("salir");
             }
